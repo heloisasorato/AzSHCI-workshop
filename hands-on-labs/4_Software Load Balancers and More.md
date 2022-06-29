@@ -65,7 +65,7 @@ In this exercise, you will test out the load balancer.
 
 3. Scroll Down the **Network Controller** information page, till you see the **Network Controller Node** info. Check on which HCI host your nc01.contoso.com -network controller is deployed. In my case, I see is host 2.
 
-![alt text](./media/nc01node "Add Network Controller Page")
+![alt text](./media/nc01node.png "Add Network Controller Page")
 
 4. Go back to the main page on Windows Admin Center, click on the right host (in my case azshost2.contoso.com). Scroll down the left menu, then click on "Virtual Machines", select NC01 vm listed and click on Power. You need to turn off this VM so we can assign more memory to it.
 

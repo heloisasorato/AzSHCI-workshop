@@ -13,23 +13,84 @@ AdminCenter: A Windows 10 Workstation with Admin Center installed
 BGP-TOR-Router: A Windows Server running Routing and Remote Access Server
 ContosoDC: Windows Server that is our Domain Controller.
 
-Contents
------------
-- [Overview](#overview)
-- [Contents](#contents)
-- [Complete Registration](#complete-registration)
-
+**Important**
 
 Azure Stack HCI 21H2 is delivered as an Azure service and needs to register within 30 days of installation per the Azure Online Services Terms.  With our cluster configured, we'll now register your Azure Stack HCI 21H2 cluster with **Azure Arc** for monitoring, support, billing, and hybrid services. Upon registration, an Azure Resource Manager resource is created to represent each on-premises Azure Stack HCI 21H2 cluster, effectively extending the Azure management plane to Azure Stack HCI 21H2. Information is periodically synced between the Azure resource and the on-premises cluster.  One great aspect of Azure Stack HCI 21H2, is that the Azure Arc registration is a native capability of Azure Stack HCI 21H2, so there is no agent required.
 
 
-## Task 1: Register Azure Stack HCI 21H2 Cluster on Azure portal.
+## Task 1: Connect cluster to WAC and update extensions
 
-   To complete registration, you have 2 options - you can use **Windows Admin Center**, or you can use **PowerShell**. For this lab, it's recommended to use the PowerShell as it is less likely that you will encounter unpredictible erros in the lab environment, due to WAC installed on the domain controller. In this environment, we will be using PowerShell to register to the Azure Stack HCI cluster.
+Start by opening the RDP Connection to AdminCenter located on the Desktop. 
 
- We're going to perform the registration from the **HybridHost001** machine, which we've been using with the Windows Admin Center.
+Log into the VM
+User Name Contoso\Administrator
+Password: Password01
 
-1. On **HybridHost001** VM after you have already logged in, click on the windows button and look for **PowerShell ISE** and right-click on it to **Run as administrator**.
+ Make the VM Console a Full Screen to avoid any confusion.
+
+Open Google Chrome and navigate to 
+https://admincenter.contoso.com
+
+Log In and Add the Hyper-Converged Cluster AzStackCluster to Windows Admin Center with Network Controller: https://nc01.contoso.com, you will need to click "Validate" to validate the connection to the Network Controller. You may be prompted to install the Network Controller PowerShell Module, do that and continue.
+
+
+![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/0503bebf131f0dfb66e030b51e9689d42a5eaf52/Scenarios/Media/Screenshots/01-res/Getting%20Started%202.png)
+
+Now that we have our Cluster connected to Admin Center we can start managing it, the first thing we will want to do is install the Extensions necessary for Admin Center.  
+
+In the Admin Center windows, click the settings icon in the top-right.
+
+	1) Open Extensions
+	2) Under "available Extensions" Select the following and Install. They will allow you to install and reboot the Admin Center Session, so you will just have to do a few of the extensions at a time. 
+	
+	Install these Extensions:
+	Active Directory
+	DNS
+	SDN Gateway Connections
+	SDN Load Balancers
+	SDN Public IP Addresses
+	SDN Route Tables
+	
+	3) Once the extensions are installed, click "Windows Admin Center" in the top left.
+	4) In the drop down menu, labeled "All Connections" switch the menu to "Cluster Manager"
+	5) Now select your cluster hyperlink; AzStackCluster.Contoso.com to manage the HCI Cluster.
+
+## Task 2: Register Azure Stack HCI 21H2 Cluster on Azure portal
+
+   To complete registration, you have 2 options - you can use **Windows Admin Center**, or you can use **PowerShell**. 
+
+   First, in the WAC browser, inside our 'Admincenter' virtual machine, click on **Settings** icon, on the top right corner. Then, in the left menu click Extensions -> Installed Extensions and then update all the extensions which shows the **Update available** message.
+
+**Windows Admin Center**
+
+1. Open the Windows Admin Center, and on the **All connections** page, select your azstackcluster.contoso.com
+2. When the cluster dashboard has loaded, in the top-right corner, you'll see the **status of the Azure registration/connection**
+
+![Azure registration status in Windows Admin Center](./media/wac_azure_reg_dashboard_2.png "Azure registration status in Windows Admin Center")
+
+3. You can begin the registration process by clicking **Register this cluster**
+4. If you haven't already, you'll be prompted to register Windows Admin Center with an Azure tenant. Follow the instructions to **Copy the code** and then click on the link to configure device login.
+5. When prompted for credentials, **enter your Azure credentials** for a tenant you'd like to register the Windows Admin Center
+6. Back in Windows Admin Center, you'll notice your tenant information has been added. You can now click **Connect** to connect Windows Admin Center to Azure
+
+![Connecting Windows Admin Center to Azure](.media/wac_azure_connectt.png "Connecting Windows Admin Center to Azure")
+
+7. Click on **Sign in** and when prompted for credentials, **enter your Azure credentials** and you should see a popup that asks for you to accept the permissions, so click **Accept**
+
+![Permissions for Windows Admin Center](./media/wac_azure_permissions.png "Permissions for Windows Admin Center")
+
+8. Back in Windows Admin Center, you may need to refresh the page if your 'Register this cluster' link is not active. Once active, click **Register this cluster** and you should be presented with a window requesting more information.
+9.  Choose your **Azure subscription** that you'd like to use to register, along with an **Azure resource group** and **region**. You can also expand **advanced** to see that **Enable Azure **Arc**** enabled by default. Click **Register**.  This will take a few moments.
+
+![Final step for registering Azure Stack HCI with Windows Admin Center](.media/wac_azure_register_21H2.png "Final step for registering Azure Stack HCI with Windows Admin Center")
+
+10. Once completed, you should see updated status on the Windows Admin Center dashboard, showing that the cluster has been correctly registered.
+
+![Azure registration status in Windows Admin Center](/deployment/media/wac_azure_reg_dashboard_3.png "Azure registration status in Windows Admin Center")
+
+**PowerShell**
+
+1. Click on the windows button and look for **PowerShell ISE** and right-click on it to **Run as administrator**.
 
     ![Volume created on Azure Stack HCI 21H2](https://raw.githubusercontent.com/CloudLabsAI-Azure/hybridworkshop/main/media/powershell.png "Volume created on Azure Stack HCI 21H2")
     

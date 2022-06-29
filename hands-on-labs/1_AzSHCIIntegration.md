@@ -82,11 +82,11 @@ In the Admin Center windows, click the settings icon in the top-right.
 8. Back in Windows Admin Center, you may need to refresh the page if your 'Register this cluster' link is not active. Once active, click **Register this cluster** and you should be presented with a window requesting more information.
 9.  Choose your **Azure subscription** that you'd like to use to register, along with an **Azure resource group** and **region**. You can also expand **advanced** to see that **Enable Azure **Arc**** enabled by default. Click **Register**.  This will take a few moments.
 
-![Final step for registering Azure Stack HCI with Windows Admin Center](.media/wac_azure_register_21H2.png "Final step for registering Azure Stack HCI with Windows Admin Center")
+![Final step for registering Azure Stack HCI with Windows Admin Center](./media/wac_azure_register_21H2.png "Final step for registering Azure Stack HCI with Windows Admin Center")
 
 10. Once completed, you should see updated status on the Windows Admin Center dashboard, showing that the cluster has been correctly registered.
 
-![Azure registration status in Windows Admin Center](/deployment/media/wac_azure_reg_dashboard_3.png "Azure registration status in Windows Admin Center")
+![Azure registration status in Windows Admin Center](./media/wac_azure_reg_dashboard_3.png "Azure registration status in Windows Admin Center")
 
 **PowerShell**
 

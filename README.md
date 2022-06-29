@@ -40,10 +40,7 @@ Then you will want to load the Parameters File, remember the file is located in 
 
 You will need to supply the Resource Group and the Admin Password still, but this is a fairly easy process.
 
-Hit Review+Create and jump to the "After Deployment Section"
-
-
-
+Hit Review+Create.
 
 
 **PowerShell Process**
@@ -76,44 +73,31 @@ Phew, we are ready to deploy. Ready, here we go.
 
 ![](media/Deployment%20Command%20POSH.jpg)
 
-
-Give this a couple of minutes, and you will see your new VM, ASHCIHost001 if you kept the default name, in your Resource group. You can RDP to the Public IP address and then begin the deployment of the cluster, this first step was only to deploy the Host, the real fun begins next but don't worry it really is easy.
-
-
 So, the deployment may error out, with a warning about the DSC extension not completing due to a system shutdown. Don't worry though. That's the beauty of DSC, the configuration will run every 15 minutes. 
 ![](media/Deploy_error_1.jpg)
 
-Go grab a coffee or lunch, the components need a few minutes to download, but once you see the shortcut on the desktop, named New-AZSHCI-Sandbox, you are ready to go. 
 
+**After Azure Deployment**
 
+When your ARM template completes - which by thw way takes some minutes, go to the Virtual Machines portal in Azure and you will see your new VM, ASHCIHost001 if you kept the default name. You need to RDP to the Public IP address of this VM. When loged in, right click to the desktop shortcut **New-AzSCHISandbox** and select **Run with powershell** . This is the script that will deploy and configure your Stack HCI cluster.  It takes more and less 2 hours, and you should come back to 3 Virtual Machines, deployed on this host. That's it, really. You now have a working Azure Stack HCI cluster, it has Hyper-V configured, a Fail over Cluster, Storage Spaces Direct, Software Defined Networking and to manage it all, Windows Admin Center.
 
-Ok, are you ready to deploy this cluster, fair enough. This is challenging, so pay attention. I want you to right click the shortcut on the desktop, and select "Run with PowerShell." Ok, go watch a movie, the next episode of Wanda-Vision/ Mandalorian. We need like 2 hours, and you should come back to 3 Virtual Machines, deployed on this host. That's it, really. You now have a working Azure Stack HCI cluster, it has Hyper-V configured, a Fail over Cluster, Storage Spaces Direct, Software Defined Networking and to manage it all, Windows Admin Center. 
-
-Once the scripts are done, Using RDP, log into the 'Admincenter' virtual machine (desktop shortcut on desktop!) with your creds: User: Contoso\Administrator Password: Password01. After logged in the AdminCenter VM, launch the link to Windows Admin Center (same credentials used before to for vm login).
+Once the scripts are done, Using RDP, log into the 'Admincenter' virtual machine (desktop shortcut on desktop!) with your creds: User: Contoso\Administrator Password: Password01. After logged in the AdminCenter VM, launch the link to Windows Admin Center (same credentials used before for vm login).
 
 Then, add the Hyper-Converged Cluster *AzStackCluster* to *Windows Admin Center* with *Network Controller*: [https://nc01.contosoc.com](https://nc01.contosoc.com) and you're off and ready to go!
 
 ![Add Hyper-Converged Cluster Connection](media/AddHCCluster.png)
 
-**After Azure Deployment**
 
 **# Azure Stack HCI Sandbox (2/7/2021)**
-
-
-![Photo of Fully Deplopyed ASHCI-Sandbox](media/AzSHCISandbox.png)
 
 The Azure Stack HCI Sandbox is a series of scripts that creates a [HyperConverged](https://docs.microsoft.com/en-us/windows-server/hyperconverged/) environment using four nested Hyper-V Virtual Machines. The purpose of the SDN Sandbox is to provide operational training on Microsoft SDN as well as provide a development environment for DevOPs to assist in the creation and
 validation of SDN features without the time consuming process of setting up physical servers and network routers\switches.
 
 >**SDN Sandbox is not a production solution!** SDN Sandbox's scripts have been modified to work in a limited resource environment. Because of this, it is not fault tolerant, is not designed to be highly available, and lacks the nimble speed of a **real** Microsoft SDN deployment.
 
-## Scenarios
-
-The ``SCRIPTS\Scenarios`` folder in this solution will be updated quite frequently with full solutions\examples of popular SDN scenarios. Please keep checking for updates!
-
 ## Workshop
 
-The ``Workhop`` folder will present you different lab exercises you can take in order to better evaluate features and capabilities of Stack HCI. 
+The ``hands-on-labs`` folder will present you different lab exercises you can take in order to better evaluate features and capabilities of Stack HCI. 
 
 ## Configuration Overview
 

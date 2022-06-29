@@ -1,4 +1,4 @@
-Exercise 1: Integrate Azure Stack HCI 21H2 with Azure
+Lab 1: Integrate Azure Stack HCI 21H2 with Azure
 ==============
 Overview
 -----------

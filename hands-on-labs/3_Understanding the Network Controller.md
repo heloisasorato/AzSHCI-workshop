@@ -123,6 +123,5 @@ In the default SDNEXPRESS configuration, Network Controller communicates with Ho
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/60834d1418a0db7e8436dab35e2eb57d5180aed7/Scenarios/Media/Screenshots/06-res/2-13.png "Find the NC Certifcate on Host") 
 
 
-
 # End of Lab
 

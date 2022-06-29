@@ -73,7 +73,7 @@ In the Admin Center windows, click the settings icon in the top-right.
 5. When prompted for credentials, **enter your Azure credentials** for a tenant you'd like to register the Windows Admin Center
 6. Back in Windows Admin Center, you'll notice your tenant information has been added. You can now click **Connect** to connect Windows Admin Center to Azure
 
-![Connecting Windows Admin Center to Azure](.media/wacwac.png "Connecting Windows Admin Center to Azure")
+![Connecting Windows Admin Center to Azure](./media/wacwac.png "Connecting Windows Admin Center to Azure")
 
 7. Click on **Sign in** and when prompted for credentials, **enter your Azure credentials** and you should see a popup that asks for you to accept the permissions, so click **Accept**
 

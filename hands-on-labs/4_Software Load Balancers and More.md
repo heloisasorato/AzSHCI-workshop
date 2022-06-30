@@ -5,7 +5,7 @@
 
 In this series of exercises, you will learn to configure software load balancing.
 
-# Lab 03.01 Create a public VIP for load balancing a pool of two VMs on a virtual network
+Task 1: Create a public VIP for load balancing a pool of two VMs on a virtual network
 
 In this lab, you will deploy a solution with the following requirements:
 
@@ -15,7 +15,7 @@ In this lab, you will deploy a solution with the following requirements:
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-01.png "Run SDN Explorer") 
 
-## Exercise 01: Deploy the Web Server VMs
+Task 2: Deploy the Web Server VMs
 
 1. In the **Console** VM, open a **PowerShell** console with Admin rights.
 
@@ -33,7 +33,7 @@ In this lab, you will deploy a solution with the following requirements:
      5. Creates WebServerVM1 and WebServerVM2 Network Interfaces in Network Controller
      6. Sets the port profiles on WebServerVM1 and WebServerVM2 Interfaces
 
-## Exercise 02: Deploy the Load Balancer
+Task 3: Deploy the Load Balancer
 
 In this exercise, you will run a script that will create the Load Balancer and VIP for the DIPs (WebServerVM1/VM2). The Load Balancer will forward TCP traffic for ports 80 and 3389.
 
@@ -41,19 +41,19 @@ In this exercise, you will run a script that will create the Load Balancer and V
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-03.png "PowerShell ISE") 
 
-1. In the PowerShell ISE, navigate to ``C:\DNEXAMPLES\03_Software_Load_Balancers_NAT\``
+2. In the PowerShell ISE, navigate to ``C:\DNEXAMPLES\03_Software_Load_Balancers_NAT\``
 
-2. Load the file ``.\03.01_LoadBalanceWebServerVMs.ps1``
+3. Load the file ``.\03.01_LoadBalanceWebServerVMs.ps1``
 
-3. Examine the PowerShell Script to see how the Load Balancer is provisioned.
+4. Examine the PowerShell Script to see how the Load Balancer is provisioned.
 
-4. Run the script.
+5. Run the script.
 
-5. After the script completes, take note of the VIP that was assigned.
+6. After the script completes, take note of the VIP that was assigned.
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-02.png "Get the VIP") 
 
-## Exercise 03: Test the Load Balancer
+Task 4: Test the Load Balancer
 
 In this exercise, you will test out the load balancer.
 
@@ -69,7 +69,7 @@ In this exercise, you will test out the load balancer.
 
 4. Go back to the main page on Windows Admin Center, click on the right host (in my case azshost2.contoso.com). Scroll down the left menu, then click on "Virtual Machines", select NC01 vm listed and click on Power. You need to turn off this VM so we can assign more memory to it.
 
-5. When the NC01 VM is Stopped, click on Settings > Memory > change the Startup memory to 5.
+5. When the NC01 VM is Stopped, click on Settings > Memory > change the Startup memory to 6. Also enable dynamic memory option.
 
 6. Start NC01 VM again
 
@@ -81,11 +81,13 @@ In this exercise, you will test out the load balancer.
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-04.png "RDP Command Line Logon") 
 
-10. You should see a password prompt. After entering the password, you should receive a certificate warning dialog. Note that you are being routed to either WebServerVM1 or WebServerVM2.
+10. You should see a password prompt: user:admnistrator, password:Password01, you should receive a certificate warning dialog. Note that you are being routed to either WebServerVM1 or WebServerVM2.
 
-![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-05.png) "RDP Certificate Warning Dialog") 
+![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/188ef296e33892e7ee0cdf29e5112a2e8e99998b/Scenarios/Media/Screenshots/07-res/3-05.png) 
 
 11. After connecting with RDP, log out of the RDP Session.
+
+> **Note:** If you cannot connect, log first to the vm via **VM connect** in WAC and enable the server to be discovered in the network OR if you see server reached memory consumption, stop the vm via WAC portal and add more memory
 
 12. Next, open up a web browser and navigate to ``http://<vip ipaddress>``.
 
@@ -93,7 +95,7 @@ In this exercise, you will test out the load balancer.
 
 13. In the browser, take a look at the server being connected to. Notice that if you hit refresh on the browser, you are redirected to the same server. In order to see load balancer switching servers, you will need to open multiple InPrivate browser tabs and connect to the VIP until you connect to the other server.
 
-## Exercise 04: Examine Load Balancer Deployment with SDN Explorer
+Task 5: Examine Load Balancer Deployment with SDN Explorer
 
 In this exercise, you will use SDN Explorer to view load balancer configuration in the Network Controller database.
 

@@ -23,13 +23,13 @@ You come up with the following action plan:
 
 ## Exercise 01:   Create a SDN VM Network named **TenantNetwork1** in Windows Admin Center with a Address Prefix of **192.172.0.0/16**
 
-1. Navigate to **Windows Admin Center -> azstackcluster.com -> Networking -> **Virtual Networks**. In **Virtual Networks**, select **Inventory**.
+1. Navigate to **Windows Admin Center -> azstackcluster.contoso.com -> Networking -> **Virtual Networks**. In **Virtual Networks**, select **Inventory**.
 
 2. In **Inventory** select **+ New**
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/3aceaf8de0f881845cec1a8dd66a1825357bbfa0/Scenarios/Media/Screenshots/03-res/1-02.png "Inventory Screen for Virtual Networks")
 
-1. In the Virtual Network dialog, fill in the following and then click **Submit**:
+3. In the Virtual Network dialog, fill in the following and then click **Submit**:
 
 |   |   |
 |---|---|
@@ -40,11 +40,11 @@ You come up with the following action plan:
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/3aceaf8de0f881845cec1a8dd66a1825357bbfa0/Scenarios/Media/Screenshots/03-res/1-07.png "Final screen of creating a virtual network")
 
-1. Wait about a minute and then you should see the following in your Virtual Networks inventory:
+4. Wait about a minute and then you should see the following in your Virtual Networks inventory:
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/3aceaf8de0f881845cec1a8dd66a1825357bbfa0/Scenarios/Media/Screenshots/03-res/1-03.png "Inventory Screen for Virtual Networks")
 
-1. Step 01 is now complete.
+5. Step 01 is now complete.
 
 
 
@@ -64,12 +64,11 @@ You come up with the following action plan:
 
 
 
-
 ## Exercise 03: Create **TenantVM1** and **TenantVM2** virtual machines and then connect their network adapters to **TenantSubnet1**
 
 1. Go to **Windows Admin Center**
 
-2. Navigate to **Windows Admin Center -> azstackcluster.com -> Virtual Machines**. In **Virtual Machines**, select **Inventory**.
+2. Navigate to **Windows Admin Center -> azstackcluster.contoso.com -> Virtual Machines**. In **Virtual Machines**, select **Inventory**.
 
 3. In **Inventory** select **+ New**
 
@@ -120,7 +119,7 @@ You come up with the following action plan:
 
 ## Exercise 04: Run Ping tests to validate VXLAN communication between both VMs.
 
-1. Using Windows Admin Center's **VM Connect** or **Hyper-V Manager**  log into **TenantVM1 (192.172.33.4)**
+1. Using Windows Admin Center's **VM Connect** or **Hyper-V Manager**  log into **TenantVM1 (192.172.33.4)** - user: contoso\Administrator, password: Password01
 
 2. From a **CMD** Prompt or a Windows PowerShell prompt, Try pinging **192.172.33.5**.
 
@@ -129,7 +128,7 @@ You come up with the following action plan:
 3. If you are successful, then you have successfully created a TenantVM Network and have two Hyper-V virtual machines communicating over that network.
 
 
-## Exercise 05; Live migrate a virtual machine to another node
+## Exercise 05: Live migrate a virtual machine to another node
 
 The final step we'll cover is using Windows Admin Center to live migrate VM001 from it's current node, to an alternate node in the cluster.
 
@@ -143,7 +142,7 @@ The final step we'll cover is using Windows Admin Center to live migrate VM001 f
 
     ![Start Live Migration using Windows Admin Center](./media/move.png "Start Live Migration using Windows Admin Center")
 
-5. Select the **Failover Cluster** from the drop down and leave the defaul on **Cluster** and  **Member Server**. You should see that the default member server selection is the **azshost2.contoso.com (Recommended)r**, since currently the VM is deployed at host 1, so we are moving it to the second host we have on our azstackcluster.contoso.com.  Then click **Move**.
+5. Select the **Failover Cluster** from the drop down and leave the defaul on **Cluster** and  **Member Server**. You should see that the default member server selection is the **azshost2.contoso.com (Recommended)r**, since currently the VM is deployed at HOST 1, so we are moving it to the second host we have on our azstackcluster.contoso.com.  Then click **Move**.
 
     ![Start Live Migration using Windows Admin Center](./media/livemigration.png "Start Live Migration using Windows Admin Center")
     
@@ -151,9 +150,3 @@ The final step we'll cover is using Windows Admin Center to live migrate VM001 f
 
     ![Start Live Migration using Windows Admin Center](./media/postmigration.png "Start Live Migration using Windows Admin Center")
     
-
-
-
-
-Proceed to the next exercise... 
-

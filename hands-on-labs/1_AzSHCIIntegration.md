@@ -33,6 +33,7 @@ https://admincenter.contoso.com
 
 Log In and Add the Hyper-Converged Cluster AzStackCluster to Windows Admin Center with Network Controller: https://nc01.contoso.com, you will need to click "Validate" to validate the connection to the Network Controller. You may be prompted to install the Network Controller PowerShell Module, do that and continue.
 
+Important!: To give the optimal experience with Windows Admin Center, you should enable Chrome to allow popups for Windows Admin Center.
 
 ![alt text](https://github.com/microsoft/AzStackHCISandbox/blob/0503bebf131f0dfb66e030b51e9689d42a5eaf52/Scenarios/Media/Screenshots/01-res/Getting%20Started%202.png)
 
@@ -57,9 +58,9 @@ In the Admin Center windows, click the settings icon in the top-right.
 
 ## Task 2: Register Azure Stack HCI 21H2 Cluster on Azure portal
 
-   To complete registration, you have 2 options - you can use **Windows Admin Center**, or you can use **PowerShell**. 
+   To complete registration, you have 2 options - you can use **Windows Admin Center**, or you can use **PowerShell**.  For this lab, it's recommended to use the PowerShell as it is less likely that you will encounter unpredictible erros in the lab environment, due to WAC installed on the domain controller.
 
-   First, in the WAC browser, inside our 'Admincenter' virtual machine, click on **Settings** icon, on the top right corner. Then, in the left menu click Extensions -> Installed Extensions and then update all the extensions which shows the **Update available** message.
+   First, in the WAC browser, inside our 'Admincenter' virtual machine, click on **Settings** icon, on the top right corner. Then, in the left menu click Extensions -> Installed Extensions and then update all the extensions which shows the **Update available** message.  
 
 **Windows Admin Center**
 
@@ -97,7 +98,7 @@ In the Admin Center windows, click the settings icon in the top-right.
 2. With the Az.StackHCI modules installed, it's now time to register your Azure Stack HCI 21H2 cluster to Azure. However, first it's worth exploring how to check the existing registration status. The following code assumes you are still in the remote PowerShell session open from the previous commands.
 
      ```powershell
-     Invoke-Command -ComputerName azstackcluster -ScriptBlock {
+     Invoke-Command -ComputerName azshost1.contoso.com -ScriptBlock {
      Get-AzureStackHCI
      } 
      ```
@@ -105,22 +106,22 @@ In the Admin Center windows, click the settings icon in the top-right.
      
     ![Check the registration status of the Azure Stack HCI 21H2 cluster](./media/output.png "Check the registration status of the Azure Stack HCI 21H2 cluster")
 
-As you can see from the result, the cluster is yet to be registered, and the cluster status identifies as **Clustered**. Azure Stack HCI 21H2 needs to register within 30 days of installation as per the Azure Online Services Terms. If it is not clustered within 30 days, the **ClusterStatus** will show **OutOfPolicy**, and if not registered within 30 days, the **RegistrationStatus** will show as **OutOfPolicy**.
+As you can see from the result, the cluster is yet to be registered, and the cluster status identifies as **Clustered**. Azure Stack HCI 21H2 needs to register within 30 days of installation as per the Azure Online Services Terms. If it is not clustered within 30 days, the **ClusterStatus** will show **OutOfPolicy**, and if not registered within 30 days, the **RegistrationStatus** will show as **OutOfPolicy**. 
 
 
-3. Now copy the below code and paste it in your PowerShell window, replace *your-subscription-ID-here* with your subscription ID <inject key="Subscription ID" />. After updating the subscription ID, run the PowerShell commands to register your Azure Stack HCI 21H2 to Azure portal. 
+3. Now copy the below code and paste it in your PowerShell window, replace *your-subscription-ID-here* with your subscription ID <inject key="Subscription ID" />. After updating the subscription ID, run the PowerShell commands to register your Azure Stack HCI 21H2 to Azure portal. Perform the registration using the name of any server in the cluster. To get your Azure subscription ID, visit portal.azure.com, navigate to Subscriptions and copy/paste your ID from the list.
 
    > **Note**: We have already updated the domain user name and password for the local host server. 
    
     ```
     
-    Register-AzStackHCI -SubscriptionId *your-subscription-ID-here* -ComputerName azstackcluster.contoso.com
+    Register-AzStackHCI -SubscriptionId *your-subscription-ID-here* -ComputerName azshost1.contoso.com
      
      ```
 
 This syntax registers the cluster (azstackcluster.contoso.com), as the current user, with the default Azure region and cloud environment, and using smart default names for the Azure resource and resource group. You can also add the optional -Region, -ResourceName, -TenantId, and -ResourceGroupName parameters to this command to specify these values. Note After June 15, 2021, running the Register-AzStackHCI cmdlet will enable Azure Arc integration on every server in the cluster by default, and the user running it must be an Azure Owner or User Access Administrator. If you do not want the servers to be Arc enabled or do not have the proper roles, pass this additional parameter: -EnableAzureArcServer:$false Remember that the user running the Register-AzStackHCI cmdlet must have Azure Active Directory permissions, or the registration process will not complete; instead, it will exit and leave the registration pending admin approval. Once permissions have been granted, simply re-run Register-AzStackHCI to complete registration. Authenticate with Azure
 
-4. Once dependencies have been installed, you'll receive a popup on **HybridHost001** to authenticate to Azure. Provide your **Azure credentials**.
+4. Once dependencies have been installed, you'll receive a popup to authenticate to Azure. Provide your **Azure credentials**.
 
     ![Login to Azure](./media/azure_login_reg.png "Login to Azure")
 
@@ -128,7 +129,7 @@ This syntax registers the cluster (azstackcluster.contoso.com), as the current u
 
     ![Register Azure Stack HCI 21H2 with PowerShell](./media/registered.png "Register Azure Stack HCI 21H2 with PowerShell")
 
-6. Once the cluster is registered, run the following command on **HybridHost001** to check the updated status:
+6. Once the cluster is registered, run the following command to check the updated status:
 
     ```powershell
     Invoke-Command -ComputerName  azstackcluster -ScriptBlock {

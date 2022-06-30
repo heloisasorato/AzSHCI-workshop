@@ -79,13 +79,12 @@ So, the deployment may error out, with a warning about the DSC extension not com
 
 **After Azure Deployment**
 
-When your ARM template completes - which by thw way takes some minutes, go to the Virtual Machines portal in Azure and you will see your new VM, ASHCIHost001 if you kept the default name. You need to RDP to the Public IP address of this VM. When loged in, right click to the desktop shortcut **New-AzSCHISandbox** and select **Run with powershell** . This is the script that will deploy and configure your Stack HCI cluster.  It takes more and less 2 hours, and you should come back to 3 Virtual Machines, deployed on this host. That's it, really. You now have a working Azure Stack HCI cluster, it has Hyper-V configured, a Fail over Cluster, Storage Spaces Direct, Software Defined Networking and to manage it all, Windows Admin Center.
+When your ARM template completes - which by the way takes some minutes, go to the Virtual Machines portal in Azure and you will see your new VM, ASHCIHost001 if you kept the default name. You need to RDP to the Public IP address of this VM. When loged in, right click to the desktop shortcut **New-AzSCHISandbox** and select **Run with powershell** . This is the script that will deploy and configure your Stack HCI cluster.  It takes more and less 2 hours, and you should come back to 3 Virtual Machines, deployed on this host. That's it, really. You now have a working Azure Stack HCI cluster, it has Hyper-V configured, a Fail over Cluster, Storage Spaces Direct, Software Defined Networking and to manage it all, Windows Admin Center.
 
-Once the scripts are done, Using RDP, log into the 'Admincenter' virtual machine (desktop shortcut on desktop!) with your creds: User: Contoso\Administrator Password: Password01. After logged in the AdminCenter VM, launch the link to Windows Admin Center (same credentials used before for vm login).
+Once the scripts are done, using RDP, log into the 'Admincenter' virtual machine (desktop shortcut on desktop!) with your creds: User: Contoso\Administrator Password: Password01. After logged in the AdminCenter VM, launch Google Chrome and go to https://admincenter.contoso.com/ and log in (same credentials used before for 'Admincenter' virtual machine login).
 
-Then, add the Hyper-Converged Cluster *AzStackCluster* to *Windows Admin Center* with *Network Controller*: [https://nc01.contosoc.com](https://nc01.contosoc.com) and you're off and ready to go!
+Now you can proceed to /hands-on-labs and start [Lab 1](https://github.com/heloisasorato/AzSHCI-workshop/blob/main/hands-on-labs/1_AzSHCIIntegration.md).
 
-![Add Hyper-Converged Cluster Connection](media/AddHCCluster.png)
 
 
 **# Azure Stack HCI Sandbox (2/7/2021)**
